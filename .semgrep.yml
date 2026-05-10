@@ -1,0 +1,27 @@
+rules:
+  # Hardcoded API key pattern — Stripe-style live keys.
+  - id: vra-hardcoded-api-key
+    message: "Hardcoded credential (CWE-798). Move to env var."
+    severity: ERROR
+    languages: [java]
+    pattern-regex: '"(sk|pk)_(live|test)_[A-Za-z0-9]{20,}"'
+
+  # Open redirect — accepting user URL without validation.
+  - id: vra-open-redirect
+    message: "Open redirect (CWE-601). Validate target against an allow-list."
+    severity: ERROR
+    languages: [java]
+    patterns:
+      - pattern: URI.create($X)
+      - metavariable-pattern:
+          metavariable: $X
+          patterns:
+            - pattern-not: '"..."'
+
+  # Path traversal — Files.readString on user-supplied path.
+  - id: vra-path-traversal
+    message: "Path traversal (CWE-22). Resolve under a base dir and normalize."
+    severity: ERROR
+    languages: [java]
+    pattern: |
+      Files.readString($BASE.resolve($USER));
