@@ -84,4 +84,13 @@
             </plugin>
         </plugins>
     </build>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>6.2.11</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
