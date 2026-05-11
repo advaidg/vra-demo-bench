@@ -10,7 +10,10 @@ import java.net.URI;
  */
 public class RedirectController {
     public URI redirectTo(String userSuppliedUrl) {
-        // No validation — accepts any URL the caller passes.
+        // Validate the URL against an allow-list before redirecting.
+        if (userSuppliedUrl == null || !userSuppliedUrl.matches("^https?://example.com/.*$")) {
+            throw new IllegalArgumentException("Invalid redirect URL: " + userSuppliedUrl);
+        }
         return URI.create(userSuppliedUrl);
     }
 }
