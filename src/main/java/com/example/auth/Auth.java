@@ -8,7 +8,7 @@ package com.example.auth;
  */
 public class Auth {
     // Hardcoded credential — should come from env var or secrets manager.
-    private static final String API_KEY = "sk_live_abcdef0123456789ABCDEF";
+    private static final String API_KEY = System.getenv("API_KEY");
 
     public boolean validate(String key) {
         if (key == null) {
